@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" fill="#d4d0c8"/>
+  <!-- front face -->
+  <path d="M6 22 L44 22 L44 58 L6 58 Z" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- top face solid edges -->
+  <line x1="6"  y1="22" x2="20" y2="8"  stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="44" y1="22" x2="58" y2="8"  stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="20" y1="8"  x2="58" y2="8"  stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- right face solid edges -->
+  <line x1="58" y1="8"  x2="58" y2="44" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="58" y1="44" x2="44" y2="58" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- hidden edges — dashed -->
+  <line x1="20" y1="8"  x2="20" y2="44" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+  <line x1="20" y1="44" x2="58" y2="44" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+  <line x1="20" y1="44" x2="6"  y2="58" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+</svg>
