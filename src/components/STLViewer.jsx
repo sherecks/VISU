@@ -210,7 +210,7 @@ export default function STLViewer({ geometry, fileName, vertexCount, onLoadNew, 
       <input
         ref={inputRef}
         type="file"
-        accept=".stl"
+        accept=".stl,.3mf"
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />

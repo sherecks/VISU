@@ -12,4 +12,16 @@ export const CATALOG = [
     description: 'Isca de pesca',
     url: '/models/FishingPopper.stl',
   },
+  {
+    id: 'magicstick',
+    name: 'Magik Stick',
+    description: 'Isca de pesca',
+    url: '/models/MagicStick.3mf',
+  },
+  {
+    id: 'magicstickhalf',
+    name: 'Magik Stick Half',
+    description: 'Isca de pesca',
+    url: '/models/MagicStickHalf.stl',
+  },
 ]

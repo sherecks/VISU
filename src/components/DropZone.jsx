@@ -7,8 +7,9 @@ export default function DropZone({ onFile, onOpenBrowser }) {
 
   const processFile = useCallback((file) => {
     if (!file) return
-    if (!file.name.toLowerCase().endsWith('.stl')) {
-      setError('Selecione um arquivo .STL')
+    const name = file.name.toLowerCase()
+    if (!name.endsWith('.stl') && !name.endsWith('.3mf')) {
+      setError('Selecione um arquivo .STL ou .3MF')
       setTimeout(() => setError(''), 3000)
       return
     }
@@ -48,7 +49,7 @@ export default function DropZone({ onFile, onOpenBrowser }) {
           <CubeIcon />
         </div>
         <h1>VISU</h1>
-        <p className="dropzone-subtitle">Visualizador STL 3D</p>
+        <p className="dropzone-subtitle">Visualizador STL / 3MF 3D</p>
 
         <div className="dropzone-divider" />
 
@@ -56,7 +57,7 @@ export default function DropZone({ onFile, onOpenBrowser }) {
           className="dropzone-btn"
           onClick={() => inputRef.current.click()}
         >
-          Abrir Arquivo STL...
+          Abrir Arquivo...
         </button>
 
         <button
@@ -69,7 +70,7 @@ export default function DropZone({ onFile, onOpenBrowser }) {
         {error
           ? <p className="dropzone-error">{error}</p>
           : <p className="dropzone-hint">
-              {dragging ? 'Solte o arquivo aqui' : 'ou arraste um arquivo .STL aqui'}
+              {dragging ? 'Solte o arquivo aqui' : 'ou arraste um arquivo .STL/.3MF aqui'}
             </p>
         }
       </div>
@@ -77,7 +78,7 @@ export default function DropZone({ onFile, onOpenBrowser }) {
       <input
         ref={inputRef}
         type="file"
-        accept=".stl"
+        accept=".stl,.3mf"
         style={{ display: 'none' }}
         onChange={handleChange}
       />
