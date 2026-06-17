@@ -4,7 +4,7 @@ export const CATALOG = [
     id: 'topwater-lure',
     name: 'Top Water Lure',
     description: 'Isca de pesca',
-    url: '/models/Topwater_Lure.STL',
+    url: '/models/TopWaterLure.stl',
   },
   {
     id: 'fishingpopper',
