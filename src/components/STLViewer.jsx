@@ -2,26 +2,10 @@ import { useRef, useMemo, useState, useCallback, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, Grid, Environment, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
-
-function useNormalizedGeometry(geometry) {
-  return useMemo(() => {
-    const geo = geometry.clone()
-    geo.center()
-    geo.computeBoundingBox()
-    const size = new THREE.Vector3()
-    geo.boundingBox.getSize(size)
-    const maxDim = Math.max(size.x, size.y, size.z)
-    const scale = 3 / maxDim
-    geo.scale(scale, scale, scale)
-    const normals = geo.getAttribute('normal')
-    const hasValidNormals = normals && normals.array.some(n => n !== 0)
-    if (!hasValidNormals) geo.computeVertexNormals()
-    return geo
-  }, [geometry])
-}
+import { normalizeGeometry } from '../lib/normalizeGeometry'
 
 function Model({ geometry, wireframe }) {
-  const geo = useNormalizedGeometry(geometry)
+  const geo = useMemo(() => normalizeGeometry(geometry), [geometry])
 
   return (
     <mesh geometry={geo} castShadow receiveShadow>
@@ -119,7 +103,7 @@ function formatVertices(n) {
   return `${n} verts`
 }
 
-export default function STLViewer({ geometry, fileName, vertexCount, onLoadNew, onBack, onOpenBrowser }) {
+export default function STLViewer({ geometry, fileName, vertexCount, onLoadNew, onBack, onOpenBrowser, onOpenTunnel }) {
   const orbitRef = useRef()
   const inputRef = useRef()
   const [wireframe, setWireframe] = useState(false)
@@ -205,6 +189,11 @@ export default function STLViewer({ geometry, fileName, vertexCount, onLoadNew, 
           <RotateIcon />
           <span>Auto</span>
         </button>
+
+        <button className="tool-btn" onClick={onOpenTunnel} title="Túnel de água">
+          <TunnelIcon />
+          <span>Túnel</span>
+        </button>
       </div>
 
       <input
@@ -266,6 +255,21 @@ function RotateIcon() {
       stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M21.5 2v6h-6" />
       <path d="M21.34 15.57a10 10 0 1 1-.57-8.38" />
+    </svg>
+  )
+}
+
+function TunnelIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="2" y1="7" x2="9" y2="7" />
+      <line x1="2" y1="12" x2="7" y2="12" />
+      <line x1="2" y1="17" x2="9" y2="17" />
+      <ellipse cx="14" cy="12" rx="4" ry="9" />
+      <line x1="18" y1="7" x2="22" y2="7" />
+      <line x1="19" y1="12" x2="22" y2="12" />
+      <line x1="18" y1="17" x2="22" y2="17" />
     </svg>
   )
 }

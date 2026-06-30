@@ -5,6 +5,7 @@ import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js
 import DropZone from './components/DropZone'
 import STLViewer from './components/STLViewer'
 import ModelBrowser from './components/ModelBrowser'
+import WaterTunnel from './components/WaterTunnel'
 
 const SUPPORTED_EXTENSIONS = ['.stl', '.3mf']
 
@@ -41,11 +42,13 @@ export default function App() {
   const [model, setModel] = useState(null)
   const [loading, setLoading] = useState(false)
   const [browserOpen, setBrowserOpen] = useState(false)
+  const [tunnelOpen, setTunnelOpen] = useState(false)
 
   const handleFile = useCallback((file) => {
     const extension = file ? getExtension(file.name) : ''
     if (!file || !SUPPORTED_EXTENSIONS.includes(extension)) return
     setLoading(true)
+    setTunnelOpen(false)
     const reader = new FileReader()
     reader.onload = (e) => {
       try {
@@ -62,6 +65,7 @@ export default function App() {
 
   const handleCatalogItem = useCallback(async (item) => {
     setBrowserOpen(false)
+    setTunnelOpen(false)
     setLoading(true)
     try {
       const res = await fetch(item.url)
@@ -104,7 +108,15 @@ export default function App() {
         />
       )}
 
-      {!loading && model && (
+      {!loading && model && tunnelOpen && (
+        <WaterTunnel
+          geometry={model.geometry}
+          fileName={model.name}
+          onBack={() => setTunnelOpen(false)}
+        />
+      )}
+
+      {!loading && model && !tunnelOpen && (
         <STLViewer
           geometry={model.geometry}
           fileName={model.name}
@@ -112,6 +124,7 @@ export default function App() {
           onLoadNew={handleFile}
           onBack={() => setModel(null)}
           onOpenBrowser={() => setBrowserOpen(true)}
+          onOpenTunnel={() => setTunnelOpen(true)}
         />
       )}
     </>

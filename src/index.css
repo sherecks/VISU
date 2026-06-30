@@ -550,6 +550,109 @@ button {
   cursor: default;
 }
 
+/* ─── Water tunnel ──────────────────────────────────────── */
+
+.tunnel-canvas-wrap {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tunnel-canvas {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.tunnel-error {
+  max-width: 320px;
+  text-align: center;
+  color: #ddd;
+  font-size: 11px;
+  padding: 16px;
+}
+
+.tunnel-error-detail {
+  margin-top: 8px;
+  color: #999;
+  font-size: 10px;
+}
+
+.tunnel-toolbar {
+  height: auto;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+.tunnel-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 160px;
+  padding: 4px 8px;
+}
+
+.tunnel-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tunnel-row input[type='range'] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #d4d0c8;
+  box-shadow:
+    inset  1px  1px #0a0a0a,
+    inset -1px -1px #ffffff,
+    inset  2px  2px #808080,
+    inset -2px -2px #dfdfdf;
+  cursor: pointer;
+}
+
+.tunnel-row input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 14px;
+  background: #d4d0c8;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset  1px  1px #ffffff,
+    inset -2px -2px #808080,
+    inset  2px  2px #dfdfdf;
+}
+
+.tunnel-row input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 14px;
+  border: none;
+  background: #d4d0c8;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset  1px  1px #ffffff,
+    inset -2px -2px #808080,
+    inset  2px  2px #dfdfdf;
+}
+
+.tunnel-label {
+  font-size: 10px;
+  color: #000;
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.tunnel-readout {
+  justify-content: space-between;
+  font-size: 10px;
+  color: #444;
+}
+
 /* ─── Responsive ────────────────────────────────────────── */
 
 @media (max-width: 480px) {
@@ -566,5 +669,10 @@ button {
     width: 100vw;
     max-height: 100vh;
     align-self: flex-end;
+  }
+
+  .tunnel-controls {
+    min-width: 100%;
+    order: 10;
   }
 }
